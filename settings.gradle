@@ -1,0 +1,14 @@
+rootProject.name = 'UIUtils'
+
+include 'Utilities'
+project(':Utilities').projectDir = file('../Utilities')
+
+include 'JSON'
+project(':JSON').projectDir = file('../JSON')
+
+include 'ByteUtils'
+project(':ByteUtils').projectDir = new File('../ByteUtils')
+
+include 'JsonUtil'
+project(':JsonUtil').projectDir = file('../JsonUtil')
+

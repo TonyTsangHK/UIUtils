@@ -1,0 +1,35 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+version = '1.0.2'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+}
+
+libsDirName = 'libs'
+
+dependencies {
+    compile project(':Utilities')
+    compile project(':JsonUtil')
+    compile project(':JSON')
+
+    compile group: 'tablelayout', name: 'TableLayout', version: '20050920'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'src'
+            exclude '**/*.java'
+        }
+    }
+}
