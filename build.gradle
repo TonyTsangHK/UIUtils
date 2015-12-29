@@ -16,7 +16,7 @@ libsDirName = 'libs'
 
 dependencies {
     compile project(':Utilities')
-    compile project(':JsonUtil')
+    compile project(':JsonUtils')
     compile project(':JSON')
 
     compile group: 'tablelayout', name: 'TableLayout', version: '20050920'
