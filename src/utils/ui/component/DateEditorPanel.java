@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import utils.date.*;
 import utils.string.StringUtil;
+import utils.ui.GuiUtils;
 
 public class DateEditorPanel extends JPanel implements ActionListener{
     /**
@@ -20,10 +21,20 @@ public class DateEditorPanel extends JPanel implements ActionListener{
     private JLabel[] weekdayLabels = new JLabel[7];
     private JLabel yearMonthLabel;
     private ArrayList<DateEditorObserver> observers;
-    private static final Font commonFont = new Font("Monospaced", Font.BOLD, 12);
+    private static final Font commonFont;
     private static final Insets commonInsets = new Insets(0, 2, 0, 2), 
         buttonInsets = new Insets(0, 5, 0, 5);
     private static final Color grey = new Color(238, 238, 238);
+
+    static {
+        double scalingFactor = GuiUtils.determineScalingFactor();
+
+        if (scalingFactor > 1) {
+            commonFont = new Font("Monospaced", Font.BOLD, (int)(12*scalingFactor*0.95));
+        } else {
+            commonFont = new Font("Monospaced", Font.BOLD, 12);
+        }
+    }
     
     public DateEditorPanel() {
         this(DateTimeParser.NORMAL_DATE_FORMAT);
@@ -174,7 +185,7 @@ public class DateEditorPanel extends JPanel implements ActionListener{
     }
     
     public void addButton(
-            JPanel panel, JButton button, Font font, Insets insets, Color color, ActionListener actionListener
+        JPanel panel, JButton button, Font font, Insets insets, Color color, ActionListener actionListener
     ) {
         if (font != null) {
             button.setFont(font);

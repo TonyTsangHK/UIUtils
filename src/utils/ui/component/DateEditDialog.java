@@ -6,11 +6,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class DateEditDialog {
-    /**
-     * Date Editor for date inputs
-     */
-    private static final long serialVersionUID = 1L;
-    
     private JDialog dialog;
     private JTextField hookedField;
     private DatePanel editor = new DatePanel();
@@ -40,16 +35,14 @@ public class DateEditDialog {
         buttonPanel.add(cancelButton);
         contentPane.add(buttonPanel, BorderLayout.SOUTH);
         
-        ActionListener handler = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                Object source = evt.getSource();
-                if (source == confirmButton) {
-                    hookedField.setText(editor.getSelectedDateValue());
-                } else if (source == clearButton) {
-                    hookedField.setText("");
-                }
-                hideEditorDialog();
+        ActionListener handler = evt -> {
+            Object source = evt.getSource();
+            if (source == confirmButton) {
+                hookedField.setText(editor.getSelectedDateValue());
+            } else if (source == clearButton) {
+                hookedField.setText("");
             }
+            hideEditorDialog();
         };
         confirmButton.addActionListener(handler);
         clearButton.addActionListener(handler);

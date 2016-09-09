@@ -8,11 +8,6 @@ import javax.swing.*;
 import utils.date.*;
 
 public class DatePanel extends JPanel implements ActionListener{
-    /**
-     * Date input panel layout
-     */
-    private static final long serialVersionUID = 1L;
-    
     private DateCalendar calendar;
     private JButton[] dayButtons = new JButton[42];
     private JButton minusMonth, minusYear, addMonth, addYear, selectedButton;
@@ -117,31 +112,6 @@ public class DatePanel extends JPanel implements ActionListener{
             }
         }
     }
-    
-    /*
-    private void addButton(JPanel panel, JButton button) {
-        panel.add(button);
-    }
-    
-    private void addButton(JPanel panel, JButton button, ActionListener actionListener) {
-        if (actionListener != null) {
-            button.addActionListener(actionListener);
-        }
-        panel.add(button);
-    }
-    
-    private void addButton(JPanel panel, JButton button, Font font, ActionListener actionListener) {
-        addButton(panel, button, font, null, null, actionListener);
-    }
-    
-    private void addButton(JPanel panel, JButton button, Font font, Insets insets, ActionListener actionListener) {
-        addButton(panel, button, font, insets, null, actionListener);
-    }
-    
-    private void addButton(JPanel panel, JButton button, Font font, Color color, ActionListener actionListener) {
-        addButton(panel, button, font, null, color, actionListener);
-    }
-    */
     
     private void addButton(JPanel panel, JButton button, Font font, 
             Insets insets, Color color, ActionListener actionListener) {

@@ -8,10 +8,7 @@ import javax.swing.*;
 import utils.date.DateTimeParser;
 import utils.ui.*;
 
-
 public class DatePicker extends JDialog implements DateEditorObserver, ActionListener {
-    private static final long serialVersionUID = 1L;
-    
     private DateField hookedField;
     private DateEditorPanel datePanel;
     private boolean hideOnSelect;
@@ -36,6 +33,7 @@ public class DatePicker extends JDialog implements DateEditorObserver, ActionLis
     
     public DatePicker(DateField field, String title, boolean hideOnSelect, String dateFormat) {
         super(GuiUtils.getParentFrame(field), title, true);
+
         setModal(true);
         setHideOnSelect(hideOnSelect);
         

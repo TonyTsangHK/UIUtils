@@ -100,6 +100,10 @@ public class DialogUtil {
     }
     
     public static JDialog showMessage(Component p, String t, String m, int mt, boolean modal) {
+        return showObjectMessage(p, t, m, mt, modal);
+    }
+
+    public static JDialog showObjectMessage(Component p, String t, Object m, int mt, boolean modal) {
         JDialog dialog = new JOptionPane(m, mt).createDialog(p, t);
         dialog.setModal(p != null && modal);
         if (p != null) {

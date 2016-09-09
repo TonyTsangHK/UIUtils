@@ -15,7 +15,8 @@ import utils.string.StringSubstitute;
 import utils.string.StringUtil;
 
 public class GuiUtils {
-    public static ArrayList<BlinkingAnimationThread> actionThreads = new ArrayList<BlinkingAnimationThread>();
+    public static ArrayList<BlinkingAnimationThread> actionThreads = new ArrayList<>();
+    public static final int DEFAULT_DPI = 96;
 
     public static boolean changeFont(Component component, String fontName) {
         return changeFont(component, fontName, -1, -1);
@@ -117,7 +118,7 @@ public class GuiUtils {
             doc.insertString(s, text, null);
             
             textComponent.setCaretPosition(s + text.length());
-        } catch (BadLocationException ble) {}
+        } catch (BadLocationException ignored) {}
         
         if (focusAfterInsert) {
             textComponent.requestFocus();
@@ -962,7 +963,7 @@ public class GuiUtils {
         for (int v = min; v <= max; v += increment) {
             double displayValue = v * unit;
             String displayText = (displayValue % 1.0 != 0)? String.valueOf(displayValue) : String.valueOf((int)displayValue);
-            labelTable.put(new Integer(v), new JLabel(displayText));
+            labelTable.put(v, new JLabel(displayText));
         }
         return labelTable;
     }
@@ -976,7 +977,42 @@ public class GuiUtils {
         
         return buttonGroup;
     }
-    
+
+    public static void changeLookAndFeelAccordingToScreenResolution() {
+        int dpi = Toolkit.getDefaultToolkit().getScreenResolution();
+
+        if (dpi > DEFAULT_DPI) {
+            GuiUtils.changeToSystemLookAndFeel();
+        } else {
+            GuiUtils.changeLookAndFeel("Nimbus");
+        }
+    }
+
+    public static double determineScalingFactor() {
+        int dpi = Toolkit.getDefaultToolkit().getScreenResolution();
+
+        if (dpi > DEFAULT_DPI) {
+            return dpi / (double) DEFAULT_DPI;
+        } else {
+            return 1;
+        }
+    }
+
+    public static void handleFontScaling(JComponent component) {
+        if (component != null) {
+            double scalingFactor = determineScalingFactor();
+
+            if (scalingFactor > 1) {
+                Font font = component.getFont();
+
+                if (font != null) {
+                    font = new Font(font.getName(), font.getStyle(), (int) (font.getSize() * scalingFactor * 0.95));
+                    component.setFont(font);
+                }
+            }
+        }
+    }
+
     public static boolean changeLookAndFeel(String lookAndFeelName, Component root) {
         if (changeLookAndFeel(lookAndFeelName)) {
             SwingUtilities.updateComponentTreeUI(root);
@@ -994,7 +1030,16 @@ public class GuiUtils {
             return false;
         }
     }
-    
+
+    public static boolean changeToSystemLookAndFeel() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static boolean changeLookAndFeel(String lookAndFeelName) {
         try {
             LookAndFeelInfo info = getLookAndFeelInfoByName(lookAndFeelName);

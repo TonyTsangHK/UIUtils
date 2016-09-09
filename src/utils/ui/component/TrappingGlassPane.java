@@ -1,7 +1,6 @@
 package utils.ui.component;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -55,7 +54,11 @@ public class TrappingGlassPane extends JComponent {
             timer.start();
         }
     }
-    
+
+    public void setProgressBarFont(Font font) {
+        progressBar.setFont(font);
+    }
+
     public void setProgressStatusText(String text) {
         progressBar.setString(text);
     }
