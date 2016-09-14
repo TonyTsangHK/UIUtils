@@ -1,4 +1,17 @@
 apply plugin: 'java'
+apply plugin: 'kotlin'
+
+buildscript {
+    ext.kotlin_version = "1.0.3"
+
+    repositories {
+        jcenter();
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
 
 sourceCompatibility = 1.8
 
@@ -19,6 +32,8 @@ dependencies {
     compile project(':JsonUtils')
     compile project(':JSON')
 
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
     compile group: 'tablelayout', name: 'TableLayout', version: '20050920'
 }
 
@@ -27,9 +42,13 @@ sourceSets {
         java {
             srcDir 'src'
         }
+        kotlin {
+            srcDir 'src'
+        }
         resources {
             srcDir 'src'
             exclude '**/*.java'
+            exclude '**/*.kt'
         }
     }
 }
