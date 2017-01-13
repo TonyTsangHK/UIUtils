@@ -1,7 +1,6 @@
 package utils.ui;
 
-import java.awt.Component;
-import java.awt.Container;
+import java.awt.*;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -37,7 +36,7 @@ public class SpringLayoutChainer {
             
             HC = SpringLayout.HORIZONTAL_CENTER,
             VC = SpringLayout.VERTICAL_CENTER,
-            
+    
             BASELINE = SpringLayout.BASELINE,
             HEIGHT   = SpringLayout.HEIGHT,
             WIDTH    = SpringLayout.WIDTH;
@@ -1690,20 +1689,20 @@ public class SpringLayoutChainer {
     }
 
     public SpringLayoutChainer buildGrid(Container container, int hPad, int vPad, int cols, Component... comps) {
-        return buildGrid(container, Spring.constant(hPad),
-                Spring.constant(vPad), cols, comps);
+        return buildGrid(container, Spring.constant(hPad), Spring.constant(vPad), cols, comps);
     }
 
     public SpringLayoutChainer buildGrid(
-            Container container, int hPad, int vPad, GridComponentOrientation orientation, Component[]... comps
+        Container container, int hPad, int vPad, GridComponentOrientation orientation, Component[]... comps
     ) {
-        return buildGrid(container, Spring.constant(hPad),
-                Spring.constant(vPad), orientation, comps);
+        return buildGrid(container, Spring.constant(hPad), Spring.constant(vPad), orientation, comps);
     }
 
     public SpringLayoutChainer buildGrid(Container container, Spring hPad, Spring vPad, int cols, Component... comps) {
         int rows = (int) Math.ceil(comps.length / (double) cols);
 
+        int totalHeight = 0, totalWidth = 0;
+        
         Spring currentY = vPad;
         for (int i = 0; i < rows; i++) {
             Spring maxHeight = Spring.constant(0);
@@ -1727,7 +1726,11 @@ public class SpringLayoutChainer {
                 }
             }
             currentY = Spring.sum(currentY, Spring.sum(maxHeight, vPad));
+            
+            totalHeight += maxHeight.getPreferredValue();
         }
+
+        totalHeight += vPad.getPreferredValue() * (rows + 1);
 
         Spring currentX = hPad;
         for (int i = 0; i < cols; i++) {
@@ -1755,19 +1758,25 @@ public class SpringLayoutChainer {
                 }
             }
             currentX = Spring.sum(currentX, Spring.sum(maxWidth, hPad));
+            
+            totalWidth += maxWidth.getPreferredValue();
         }
+        
+        totalWidth += hPad.getPreferredValue() * (cols + 1);
+        
+        container.setPreferredSize(new Dimension(totalWidth, totalHeight));
 
         return this;
     }
 
     public SpringLayoutChainer buildGrid(
-            Container container, int hPad, int vPad, int col, Collection<? extends Component> comps
+        Container container, int hPad, int vPad, int col, Collection<? extends Component> comps
     ) {
         return buildGrid(container, Spring.constant(hPad), Spring.constant(vPad), col, comps);
     }
 
     public SpringLayoutChainer buildGrid(
-            Container container, Spring hPad, Spring vPad, int cols, Collection<? extends Component> comps
+        Container container, Spring hPad, Spring vPad, int cols, Collection<? extends Component> comps
     ) {
         Component[] compArr = new Component[comps.size()];
         comps.toArray(compArr);
@@ -1775,8 +1784,8 @@ public class SpringLayoutChainer {
     }
 
     public SpringLayoutChainer buildGrid(
-            Container container, int hPad, int vPad, GridComponentOrientation orientation,
-            Collection<? extends Component>... collections
+        Container container, int hPad, int vPad, GridComponentOrientation orientation,
+        Collection<? extends Component>... collections
     ) {
         return buildGrid(container, Spring.constant(hPad), Spring.constant(vPad), orientation, collections);
     }
