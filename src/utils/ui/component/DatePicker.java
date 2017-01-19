@@ -57,6 +57,10 @@ public class DatePicker extends JDialog implements DateEditorObserver, ActionLis
         container.add(buttonPanel, BorderLayout.SOUTH);
     }
     
+    public void setSelection(String selection) {
+        datePanel.setValue(selection);
+    }
+    
     public void setHideOnSelect(boolean hideOnSelect) {
         this.hideOnSelect = hideOnSelect;
     }

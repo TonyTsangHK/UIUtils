@@ -68,6 +68,7 @@ public class DateField extends JTextField implements MouseListener {
     
     @Override
     public void mouseClicked(MouseEvent evt) {
+        datePicker.setSelection(getText());
         datePicker.setLocation(this.getLocationOnScreen());
         datePicker.pack();
         datePicker.setVisible(true);

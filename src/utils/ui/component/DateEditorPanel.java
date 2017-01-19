@@ -140,7 +140,7 @@ public class DateEditorPanel extends JPanel implements ActionListener{
         if (calendar == null) {
             calendar = new DateCalendar();
         }
-        // int y = calendar.getYear();, m = calendar.getMonth();
+        DateCalendar currentDate = new DateCalendar();
         setYearMonthLabel(calendar.getYear(), calendar.getMonth());
         int firstDay = DateCalendar.getFirstWeekDay(calendar.getYear(), calendar.getMonth());
         int availableDays = DateCalendar.getAvailableMonthdays(calendar.getYear(), calendar.getMonth());
@@ -148,7 +148,7 @@ public class DateEditorPanel extends JPanel implements ActionListener{
             int d = count + 2 - firstDay;
             if (d <= availableDays && d > 0) {
                 dayButtons[count].setText(String.valueOf(d));
-                if (d == calendar.getDay()) {
+                if (d == calendar.getDay() && currentDate.getYear() == calendar.getYear() && currentDate.getMonth() == calendar.getMonth()) {
                     dayButtons[count].setBackground(Color.YELLOW);
                     selectedButton = dayButtons[count];
                 } else {
@@ -279,6 +279,11 @@ public class DateEditorPanel extends JPanel implements ActionListener{
     
     public void setDate(String dateStr, String formatStr) {
         calendar.setDate(dateStr, formatStr);
+    }
+    
+    public void setSelection(String selection) {
+        this.currentSelection = selection;
+        this.origin = this.currentSelection;
     }
     
     public void setValue(String value) {
