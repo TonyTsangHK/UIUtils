@@ -82,6 +82,34 @@ public class FilterComboBox<O> extends JComboBox<O> {
             super.removeItem(item);
         }
     }
+    
+    public void clearFilter() {
+        DefaultComboBoxModel<O> model = (DefaultComboBoxModel<O>) this.getModel();
+        
+        O selectedItem = (O) getSelectedItem();
+        
+        if (model.getSize() < items.size()) {
+            model.removeAllElements();
+            
+            for (O s : items) {
+                model.addElement(s);
+            }
+        }
+        
+        if (selectedItem != null) {
+            int foundIndex = -1;
+            for (int i = 0; i < getItemCount(); i++) {
+                if (getItemAt(i) == selectedItem) {
+                    foundIndex = i;
+                    break;
+                }
+            }
+            
+            if (foundIndex != -1) {
+                setSelectedIndex(foundIndex);
+            }
+        }
+    }
 
     public void comboFilter(String enteredText) {
         if (!this.isPopupVisible()) {
