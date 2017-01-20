@@ -39,6 +39,19 @@ object LanguageHandler {
         )!!
     }
     
+    fun setLang(lang: String) {
+        for (lg in LANG.values()) {
+            if (lg.lang == lang) {
+                setLang(lg)
+                // Done with setLang, return
+                return
+            }
+        }
+        
+        // Unknown lang, use default
+        setLang(DEFAULT_LANG)
+    }
+    
     @JvmStatic
     fun variable(key: String): String {
         return constantHandler.getConstantStringValue(key, true)!!
