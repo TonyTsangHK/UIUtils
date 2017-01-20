@@ -32,20 +32,11 @@ object LanguageHandler {
      */
     @JvmStatic
     fun setLang(lang: LANG) {
-        when(lang) {
-            LANG.EN_US -> {
-                currentLang = lang
-                constantHandler = ConstantFactory.getConstantHandler(
-                    javaClass, "lang-${lang.lang}.json"
-                )!!
-            }
-            else -> {
-                currentLang = DEFAULT_LANG
-                constantHandler = ConstantFactory.getConstantHandler(
-                    javaClass, "lang-${DEFAULT_LANG.lang}.json"
-                )!!
-            }
-        }
+        // since lang is restricted by LANG enum class, exceptional case handling code is not required. 
+        currentLang = lang
+        constantHandler = ConstantFactory.getConstantHandler(
+            ResourceLoader("lang"), "lang-${lang.lang}.json"
+        )!!
     }
     
     @JvmStatic
