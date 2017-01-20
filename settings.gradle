@@ -9,6 +9,9 @@ project(':JSON').projectDir = file('../JSON')
 include 'ByteUtils'
 project(':ByteUtils').projectDir = new File('../ByteUtils')
 
+include 'TemplateUtils'
+project(':TemplateUtils').projectDir = new File('../TemplateUtils')
+
 include 'JsonUtils'
 project(':JsonUtils').projectDir = file('../JsonUtils')
 

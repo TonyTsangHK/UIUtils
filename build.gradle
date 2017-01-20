@@ -29,6 +29,7 @@ libsDirName = 'libs'
 
 dependencies {
     compile project(':Utilities')
+    compile project(':TemplateUtils')
     compile project(':JsonUtils')
     compile project(':JSON')
 
