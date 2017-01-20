@@ -17,5 +17,12 @@
         "thursday": "四",
         "friday": "五",
         "saturday": "六"
+    },
+    
+    "textPopUp": {
+        "copy": "複製",
+        "cut": "剪下",
+        "paste": "貼上",
+        "selectAll": "全選"
     }
 }

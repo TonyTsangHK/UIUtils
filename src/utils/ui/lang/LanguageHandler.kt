@@ -1,5 +1,6 @@
-package utils.ui.component
+package utils.ui.lang
 
+import utils.template.ResourceLoader
 import utils.template.constant.ConstantFactory
 import utils.template.constant.ConstantHandler
 
@@ -11,7 +12,7 @@ import utils.template.constant.ConstantHandler
  */
 object LanguageHandler {
     enum class LANG(val lang: String) {
-        EN_US("en-us"), ZH_HK("zh-hk");
+        EN_US("en_US"), ZH_HK("zh_HK"), ZH_CN("zh_CN");
         
         override fun toString(): String {
             return lang
@@ -21,7 +22,7 @@ object LanguageHandler {
     private val DEFAULT_LANG = LANG.ZH_HK
     private var currentLang = DEFAULT_LANG
     private var constantHandler: ConstantHandler = ConstantFactory.getConstantHandler(
-        LanguageHandler.javaClass, "lang-$currentLang.json"
+        ResourceLoader("lang"), "lang-${currentLang}.json"
     )!!
 
     /**
@@ -35,13 +36,13 @@ object LanguageHandler {
             LANG.EN_US -> {
                 currentLang = lang
                 constantHandler = ConstantFactory.getConstantHandler(
-                    LanguageHandler.javaClass, "lang-${lang.lang}.json"
+                    javaClass, "lang-${lang.lang}.json"
                 )!!
             }
             else -> {
                 currentLang = DEFAULT_LANG
                 constantHandler = ConstantFactory.getConstantHandler(
-                    LanguageHandler.javaClass, "lang-${DEFAULT_LANG.lang}.json"
+                    javaClass, "lang-${DEFAULT_LANG.lang}.json"
                 )!!
             }
         }

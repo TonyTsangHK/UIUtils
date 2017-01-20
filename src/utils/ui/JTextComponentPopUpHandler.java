@@ -1,20 +1,16 @@
 package utils.ui;
 
+import utils.ui.lang.LanguageHandler;
+
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Transferable;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Locale;
-import java.util.Map;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.text.JTextComponent;
-
-import utils.ui.lang.TextMenuLang;
 
 public class JTextComponentPopUpHandler implements MouseListener {
     private JTextComponent source;
@@ -22,28 +18,14 @@ public class JTextComponentPopUpHandler implements MouseListener {
     private JPopupMenu popUpMenu;
     
     private JMenuItem copyItem, cutItem, pasteItem, selectAllItem;
-    
+
     public JTextComponentPopUpHandler(JTextComponent textComp) {
-        this(textComp, Locale.getDefault().toString());
-    }
-
-    public JTextComponentPopUpHandler(JTextComponent textComp, String lang) {
-        this(textComp, TextMenuLang.getLangMap(lang));
-    }
-
-    public JTextComponentPopUpHandler(JTextComponent textComp, Map<String, String> langMap) {
         this.source = textComp;
-        constructPopUpMenu(langMap);
+        constructPopUpMenu();
     }
     
     public static void enablePopUpHandlerForJTextComponent(JTextComponent textComp) {
         textComp.addMouseListener(new JTextComponentPopUpHandler(textComp));
-    }
-    
-    public static void enablePopUpHandlerForJTextComponent(JTextComponent textComp, String lang) {
-        textComp.addMouseListener(
-            new JTextComponentPopUpHandler(textComp, lang)
-        );
     }
     
     public static void enablePopUpHandlerForJTextComponents(JTextComponent ... textComps) {
@@ -52,19 +34,13 @@ public class JTextComponentPopUpHandler implements MouseListener {
         }
     }
     
-    public static void enablePopUpHandlerForJTextComponets(String lang, JTextComponent ... textComps) {
-        for (JTextComponent textComp : textComps) {
-            enablePopUpHandlerForJTextComponent(textComp, lang);
-        }
-    }
-    
-    private void constructPopUpMenu(Map<String, String> langMap) {
+    private void constructPopUpMenu() {
         popUpMenu = new JPopupMenu();
         
-        copyItem = new JMenuItem(langMap.get("copy"));
-        cutItem = new JMenuItem(langMap.get("cut"));
-        pasteItem = new JMenuItem(langMap.get("paste"));
-        selectAllItem = new JMenuItem(langMap.get("selectAll"));
+        copyItem = new JMenuItem(LanguageHandler.variable("textPopUp.copy"));
+        cutItem = new JMenuItem(LanguageHandler.variable("textPopUp.cut"));
+        pasteItem = new JMenuItem(LanguageHandler.variable("textPopUp.paste"));
+        selectAllItem = new JMenuItem(LanguageHandler.variable("textPopUp.selectAll"));
         
         popUpMenu.add(copyItem);
         popUpMenu.add(cutItem);
@@ -77,37 +53,17 @@ public class JTextComponentPopUpHandler implements MouseListener {
         selectAllItem.setMnemonic('a');
         
         copyItem.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        source.copy();
-                    }
-                }
+            e -> source.copy()
         );
         
         cutItem.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        source.cut();
-                    }
-                }
+            e -> source.cut()
         );
         pasteItem.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        source.paste();
-                    }
-                }
+            e -> source.paste()
         );
         selectAllItem.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        source.selectAll();
-                    }
-                }
+            e -> source.selectAll()
         );
     }
     

@@ -17,5 +17,12 @@
         "thursday": "Tue",
         "friday": "Fri",
         "saturday": "Sat"
+    },
+
+    "textPopUp": {
+        "copy": "Copy",
+        "cut": "Cut",
+        "paste": "Paste",
+        "selectAll": "Select All"
     }
 }

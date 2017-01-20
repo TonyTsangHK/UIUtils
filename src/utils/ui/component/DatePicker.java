@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import utils.date.DateTimeParser;
 import utils.ui.*;
+import utils.ui.lang.LanguageHandler;
 
 public class DatePicker extends JDialog implements DateEditorObserver, ActionListener {
     private DateField hookedField;

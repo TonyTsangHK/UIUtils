@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import javax.swing.text.Document;
 
 import utils.date.DateTimeParser;
+import utils.ui.lang.LanguageHandler;
 
 @SuppressWarnings("serial")
 public class DateField extends JTextField implements MouseListener {

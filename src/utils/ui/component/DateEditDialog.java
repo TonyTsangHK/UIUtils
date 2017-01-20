@@ -1,5 +1,7 @@
 package utils.ui.component;
 
+import utils.ui.lang.LanguageHandler;
+
 import java.awt.*;
 import java.awt.event.*;
 

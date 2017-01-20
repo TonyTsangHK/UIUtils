@@ -6,6 +6,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import utils.date.*;
+import utils.ui.lang.LanguageHandler;
 
 public class DatePanel extends JPanel implements ActionListener{
     private DateCalendar calendar;
