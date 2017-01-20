@@ -25,9 +25,9 @@ public class DateEditDialog {
         Container contentPane = dialog.getContentPane();
         contentPane.setLayout(new BorderLayout());
         contentPane.add(editor, BorderLayout.CENTER);
-        final JButton confirmButton = new JButton("確定"),
-            clearButton = new JButton("清除"),
-            cancelButton = new JButton("取消");
+        final JButton confirmButton = new JButton(LanguageHandler.variable("labels.confirm")),
+            clearButton = new JButton(LanguageHandler.variable("labels.clear")),
+            cancelButton = new JButton(LanguageHandler.variable("labels.cancel"));
         
         JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.add(confirmButton);
@@ -47,7 +47,7 @@ public class DateEditDialog {
         confirmButton.addActionListener(handler);
         clearButton.addActionListener(handler);
         cancelButton.addActionListener(handler);
-        dialog.setTitle("請選擇日期:");
+        dialog.setTitle(LanguageHandler.variable("messages.msgChooseDate"));
     }
     
     public void showEditorDialog() {

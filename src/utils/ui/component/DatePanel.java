@@ -38,21 +38,21 @@ public class DatePanel extends JPanel implements ActionListener{
         addButton(buttonPanel, addMonth, commonFont, buttonInsets, grey, this);
         addButton(buttonPanel, addYear, commonFont, buttonInsets, grey, this);
         
-        weekdayLabels[0] = new JLabel("日", JLabel.CENTER);
-        weekdayLabels[1] = new JLabel("一", JLabel.CENTER);
-        weekdayLabels[2] = new JLabel("二", JLabel.CENTER);
-        weekdayLabels[3] = new JLabel("三", JLabel.CENTER);
-        weekdayLabels[4] = new JLabel("四", JLabel.CENTER);
-        weekdayLabels[5] = new JLabel("五", JLabel.CENTER);
-        weekdayLabels[6] = new JLabel("六", JLabel.CENTER);
+        weekdayLabels[0] = new JLabel(LanguageHandler.variable("daysOfWeek.sunday"), JLabel.CENTER);
+        weekdayLabels[1] = new JLabel(LanguageHandler.variable("daysOfWeek.monday"), JLabel.CENTER);
+        weekdayLabels[2] = new JLabel(LanguageHandler.variable("daysOfWeek.tuesday"), JLabel.CENTER);
+        weekdayLabels[3] = new JLabel(LanguageHandler.variable("daysOfWeek.wednesday"), JLabel.CENTER);
+        weekdayLabels[4] = new JLabel(LanguageHandler.variable("daysOfWeek.tuesday"), JLabel.CENTER);
+        weekdayLabels[5] = new JLabel(LanguageHandler.variable("daysOfWeek.friday"), JLabel.CENTER);
+        weekdayLabels[6] = new JLabel(LanguageHandler.variable("daysOfWeek.saturday"), JLabel.CENTER);
         weekdayLabels[0].setForeground(Color.RED);
         
         int firstDay = DateCalendar.getFirstWeekDay(calendar.getYear(), calendar.getMonth());
         int availableDays = DateCalendar.getAvailableMonthdays(calendar.getYear(), calendar.getMonth());
-        
-        for (int count = 0; count < weekdayLabels.length; count++) {
-            weekdayLabels[count].setAlignmentX(JLabel.CENTER);
-            dayPanel.add(weekdayLabels[count]);
+
+        for (JLabel weekdayLabel : weekdayLabels) {
+            weekdayLabel.setAlignmentX(JLabel.CENTER);
+            dayPanel.add(weekdayLabel);
         }
         
         for (int count = 0; count < dayButtons.length; count++) {
@@ -113,8 +113,10 @@ public class DatePanel extends JPanel implements ActionListener{
         }
     }
     
-    private void addButton(JPanel panel, JButton button, Font font, 
-            Insets insets, Color color, ActionListener actionListener) {
+    private void addButton(
+        JPanel panel, JButton button, Font font, 
+        Insets insets, Color color, ActionListener actionListener
+    ) {
         if (font != null) {
             button.setFont(font);
         }

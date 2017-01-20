@@ -16,7 +16,7 @@ public class DatePicker extends JDialog implements DateEditorObserver, ActionLis
     private JButton clearButton;
     
     public DatePicker(DateField field) {
-        this(field, "請選擇日期");
+        this(field, LanguageHandler.variable("messages.msgChooseDate"));
     }
     
     public DatePicker(DateField field, String title) {
@@ -44,7 +44,9 @@ public class DatePicker extends JDialog implements DateEditorObserver, ActionLis
         
         datePanel = new DateEditorPanel(dateFormat, this);
         
-        clearButton = GuiUtils.createButton("清除", "clear", this);
+        clearButton = GuiUtils.createButton(
+            LanguageHandler.variable("labels.clear"), "clear", this
+        );
         
         buttonPanel = new JPanel(new FlowLayout());
         

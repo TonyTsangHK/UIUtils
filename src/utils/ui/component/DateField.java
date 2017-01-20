@@ -41,7 +41,7 @@ public class DateField extends JTextField implements MouseListener {
     private void initialize(String dateFormat) {
         setEditable(false);
         addMouseListener(this);
-        datePicker = new DatePicker(this, "請選擇日期", true, dateFormat);
+        datePicker = new DatePicker(this, LanguageHandler.variable("messages.msgChooseDate"), true, dateFormat);
     }
     
     public String getDateFormat() {
