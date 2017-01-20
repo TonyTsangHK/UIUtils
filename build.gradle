@@ -47,7 +47,7 @@ sourceSets {
             srcDir 'src'
         }
         resources {
-            srcDir 'src'
+            srcDirs = ["src", "resources"]
             exclude '**/*.java'
             exclude '**/*.kt'
         }
