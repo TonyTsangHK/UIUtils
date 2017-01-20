@@ -39,6 +39,7 @@ object LanguageHandler {
         )!!
     }
     
+    @JvmStatic
     fun setLang(lang: String) {
         for (lg in LANG.values()) {
             if (lg.lang == lang) {
