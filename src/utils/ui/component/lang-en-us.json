@@ -1,0 +1,21 @@
+{
+    "labels": {
+        "confirm": "Confirm",
+        "clear": "Clear",
+        "cancel": "Cancel"
+    },
+
+    "messages": {
+        "msgChooseDate": "Please choose a date"
+    },
+
+    "daysOfWeek": {
+        "sunday": "Sun",
+        "monday": "Mon",
+        "tuesday": "Tue",
+        "wednesday": "Wed",
+        "thursday": "Tue",
+        "friday": "Fri",
+        "saturday": "Sat"
+    }
+}

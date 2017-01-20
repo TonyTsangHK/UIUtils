@@ -1,0 +1,21 @@
+{
+    "labels": {
+        "confirm": "確定",
+        "clear": "清除",
+        "cancel": "取消"
+    },
+    
+    "messages": {
+        "msgChooseDate": "請選擇日期" 
+    },
+    
+    "daysOfWeek": {
+        "sunday": "日",
+        "monday": "一",
+        "tuesday": "二",
+        "wednesday": "三",
+        "thursday": "四",
+        "friday": "五",
+        "saturday": "六"
+    }
+}
