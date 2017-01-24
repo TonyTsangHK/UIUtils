@@ -17,6 +17,8 @@ import utils.string.StringUtil;
 public class GuiUtils {
     public static ArrayList<BlinkingAnimationThread> actionThreads = new ArrayList<>();
     public static final int DEFAULT_DPI = 96;
+    
+    private static double previousCalculatedFactor = -1;
 
     public static boolean changeFont(Component component, String fontName) {
         return changeFont(component, fontName, -1, -1);
@@ -979,21 +981,114 @@ public class GuiUtils {
     }
 
     public static void changeLookAndFeelAccordingToScreenResolution() {
-        int dpi = Toolkit.getDefaultToolkit().getScreenResolution();
-
-        if (dpi > DEFAULT_DPI) {
+        if (determineScalingFactor() > 1.0) {
             GuiUtils.changeToSystemLookAndFeel();
         } else {
             GuiUtils.changeLookAndFeel("Nimbus");
         }
     }
-
-    public static double determineScalingFactor() {
-        int dpi = Toolkit.getDefaultToolkit().getScreenResolution();
-
-        if (dpi > DEFAULT_DPI) {
-            return dpi / (double) DEFAULT_DPI;
+    
+    // Used for scaling factor debug only.
+    public static String getScalingFactorDebugMessages() {
+        StringBuilder builder = new StringBuilder();
+        
+        if (isHiDPISupported()) {
+            builder.append("Current JRE support HiDPI, scaling factor will always be 1, leave the scaling job to the JRE");
+            
+            return builder.toString();
         } else {
+            double calculatedScalingFactor;
+
+            // default to one
+            double maxFactor = 1;
+
+            GraphicsDevice[] devices = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+
+            for (int i = 0; i < devices.length; i++) {
+                GraphicsDevice device = devices[i];
+
+                DisplayMode displayMode = device.getDisplayMode();
+
+                int w = displayMode.getWidth(), h = displayMode.getHeight();
+
+                GraphicsConfiguration configuration = device.getDefaultConfiguration();
+
+                Rectangle bounds = configuration.getBounds();
+
+                double boundWidth = bounds.width, boundHeight = bounds.getHeight();
+
+                maxFactor = Math.max(maxFactor, Math.max(bounds.getWidth() / displayMode.getWidth(), bounds.getHeight() / displayMode.getHeight()));
+
+                builder.append("Screen ").append(i + 1).append(", resolution: ").append(w).append(" x ").append(h).append(", bounds: ").append(boundWidth).append(" x ").append(boundHeight).append('\n');
+
+                // possible surface pro 4 device
+                if (displayMode.getWidth() == 2736 && displayMode.getHeight() == 1824) {
+                    maxFactor = Math.max(maxFactor, 2);
+                }
+            }
+
+            int dpi = Toolkit.getDefaultToolkit().getScreenResolution();
+
+            double toolkitReportedFactor = (dpi > DEFAULT_DPI) ? dpi / (double) DEFAULT_DPI : 1;
+
+            calculatedScalingFactor = Math.max(toolkitReportedFactor, maxFactor);
+
+            builder.append("Calculated scaling factor: ").append(calculatedScalingFactor).append("\n");
+
+            builder.append("System look and feel: ").append(UIManager.getSystemLookAndFeelClassName());
+
+            return builder.toString();
+        }
+    }
+    
+    public static boolean isHiDPISupported() {
+        // HiDPI is supported starting JRE 9
+        String javaVersion = System.getProperty("java.version");
+        
+        JavaVersion version = new JavaVersion(javaVersion);
+        
+        return version.getMajorVersion() >= 9;
+    }
+    
+    public static double determineScalingFactor() {
+        if (!isHiDPISupported()) {
+            if (previousCalculatedFactor < 0) {
+                // default to one
+                double maxFactor = 1;
+
+                GraphicsDevice[] devices = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+
+                for (int i = 0; i < devices.length; i++) {
+                    GraphicsDevice device = devices[i];
+
+                    DisplayMode displayMode = device.getDisplayMode();
+
+                    int w = displayMode.getWidth(), h = displayMode.getHeight();
+
+                    GraphicsConfiguration configuration = device.getDefaultConfiguration();
+
+                    Rectangle bounds = configuration.getBounds();
+
+                    double boundWidth = bounds.width, boundHeight = bounds.getHeight();
+
+                    maxFactor = Math.max(maxFactor, Math.max(boundWidth / w, boundHeight / h));
+
+                    // possible surface pro device, set scaling factor to 2
+                    if (w == 2736 && h == 1824) {
+                        maxFactor = Math.max(maxFactor, 2);
+                    }
+                }
+
+                int dpi = Toolkit.getDefaultToolkit().getScreenResolution();
+
+                double toolkitReportedFactor = (dpi > DEFAULT_DPI) ? dpi / (double) DEFAULT_DPI : 1;
+
+                previousCalculatedFactor = Math.max(toolkitReportedFactor, maxFactor);
+            }
+
+            return previousCalculatedFactor;
+        } else {
+            // Return one, since jre support HiDPI scaling leave the scaling job to JRE.
             return 1;
         }
     }
@@ -1088,5 +1183,99 @@ public class GuiUtils {
             }
         }
         return new Font(Font.SERIF, style, size);
+    }
+
+    public static class JavaVersion implements Comparable<JavaVersion> {
+        private int[] parts;
+        private int update;
+        private String raw;
+        private boolean isEA = false;
+
+        public JavaVersion(String version) {
+            this.raw = version;
+            try {
+                String[] vParts = version.split("_");
+                if (vParts.length == 2) {
+                    update = Integer.parseInt(vParts[1]);
+                } else {
+                    update = -1;
+                }
+
+                String vPart = vParts[0];
+                
+                if (vPart.endsWith("-ea")) {
+                    isEA = true;
+                    vPart = vPart.substring(0, vPart.length()-3);
+                }
+
+                String[] versionParts = vPart.split("\\.");
+
+                parts = new int[versionParts.length];
+
+                for (int i = 0; i < versionParts.length; i++) {
+                    String p = versionParts[i];
+
+                    parts[i] = Integer.parseInt(p);
+                }
+            } catch (NumberFormatException nfe) {
+                parts = new int[0];
+                update = -1;
+            }
+        }
+
+        public int getPart(int index) {
+            if (index >= 0 && index < parts.length) {
+                return parts[index];
+            } else {
+                return -1;
+            }
+        }
+
+        public boolean isMajorVersion() {
+            return parts.length == 1 && update == -1;
+        }
+
+        public int getMajorVersion() {
+            if (isMajorVersion()) {
+                return parts[0];
+            } else if (parts.length > 1) {
+                return parts[1];
+            } else {
+                return -1;
+            }
+        }
+
+        @Override
+        public int compareTo(JavaVersion o) {
+            int mv = getMajorVersion(), omv = o.getMajorVersion();
+
+            if (mv > omv) {
+                return 1;
+            } else if (mv < omv) {
+                return -1;
+            } else {
+                if (isMajorVersion() && o.isMajorVersion()) {
+                    return 0;
+                } else {
+                    for (int i = 2, j = 2; i < parts.length && j < o.parts.length; i++, j++) {
+                        int p = parts[i], op = o.parts[j];
+
+                        if (p > op) {
+                            return 1;
+                        } else if (p < op) {
+                            return -1;
+                        }
+                    }
+
+                    if (update > o.update) {
+                        return 1;
+                    } else if (update < o.update) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                }
+            }
+        }
     }
 }
