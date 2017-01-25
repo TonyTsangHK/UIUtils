@@ -168,6 +168,9 @@ public class DateEditorPanel extends JPanel implements ActionListener{
                 if (isSelectedDate) {
                     // Selected date highlight always precede current date highlight
                     dayButtons[count].setBackground(selectedDateHighlightColor);
+                    
+                    // set selected button in case, in case calendar's year month changed without marking the selectedButton.
+                    selectedButton = dayButtons[count];
                 } else if (isCurrentYearMonth && d == currentDate.getDay()) {
                     dayButtons[count].setBackground(currentDateHighlightColor);
                 } else {
