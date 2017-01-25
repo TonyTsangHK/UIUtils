@@ -8,6 +8,12 @@ import javax.swing.*;
 import utils.date.*;
 import utils.ui.lang.LanguageHandler;
 
+/**
+ * @deprecated Not used in other UI components, except DateEditDialog which is deprecated
+ * 
+ * Found no use in other UI components and this should not be used standalone
+ * Duplicated functionality with DateEditorPanel
+ */
 public class DatePanel extends JPanel implements ActionListener{
     private DateCalendar calendar;
     private JButton[] dayButtons = new JButton[42];
@@ -60,6 +66,7 @@ public class DatePanel extends JPanel implements ActionListener{
             int d = count + 2 - firstDay;
             if (d <= availableDays && d > 0) {
                 dayButtons[count] = new JButton(String.valueOf(d));
+                // No need to check year & month, they should be equal to current year & month during initialization
                 if (d == calendar.getDay()) {
                     dayButtons[count].setBackground(Color.YELLOW);
                     selectedButton = dayButtons[count];
@@ -74,6 +81,9 @@ public class DatePanel extends JPanel implements ActionListener{
             dayButtons[count].setFont(commonFont);
             dayButtons[count].setMargin(commonInsets);
             dayPanel.add(dayButtons[count]);
+            if (count % 7 == 0) {
+                dayButtons[count].setForeground(Color.RED);
+            }
         }
         
         setLayout(new GridBagLayout());
@@ -93,7 +103,7 @@ public class DatePanel extends JPanel implements ActionListener{
         if (calendar == null) {
             calendar = new DateCalendar();
         }
-        //int y = calendar.getYear(), m = calendar.getMonth();
+        DateCalendar currentDate = new DateCalendar();
         setYearMonthLabel(calendar.getYear(), calendar.getMonth());
         int firstDay = DateCalendar.getFirstWeekDay(calendar.getYear(), calendar.getMonth());
         int availableDays = DateCalendar.getAvailableMonthdays(calendar.getYear(), calendar.getMonth());
@@ -101,7 +111,7 @@ public class DatePanel extends JPanel implements ActionListener{
             int d = count + 2 - firstDay;
             if (d <= availableDays && d > 0) {
                 dayButtons[count].setText(String.valueOf(d));
-                if (d == calendar.getDay()) {
+                if (d == currentDate.getDay() && currentDate.getYear() == calendar.getYear() && currentDate.getMonth() == calendar.getMonth()) {
                     dayButtons[count].setBackground(Color.YELLOW);
                     selectedButton = dayButtons[count];
                 } else {
@@ -153,7 +163,10 @@ public class DatePanel extends JPanel implements ActionListener{
                     selectedButton.setBackground(grey);
                 }
                 selectedButton = source;
-                source.setBackground(Color.YELLOW);
+                
+                // Only highlight current date but not selected date
+                //source.setBackground(Color.YELLOW);
+                
                 calendar.setDay(Integer.parseInt(source.getText()));
             } else {
                 return;

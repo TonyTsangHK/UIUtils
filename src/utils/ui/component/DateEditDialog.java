@@ -7,6 +7,9 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+/**
+ * @deprecated Use DatePicker instead
+ */
 public class DateEditDialog {
     private JDialog dialog;
     private JTextField hookedField;
