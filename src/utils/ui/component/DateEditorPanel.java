@@ -26,7 +26,10 @@ public class DateEditorPanel extends JPanel implements ActionListener{
     private static final Insets commonInsets = new Insets(0, 2, 0, 2), 
         buttonInsets = new Insets(0, 5, 0, 5);
     private static final Color grey = new Color(238, 238, 238);
+    private Color currentDateHighlightColor = DEFAULT_CURRENT_DATE_HIGHLIGHT_COLOR, selectedDateHighlightColor = DEFAULT_SELECTED_DATE_HIGHLIGHT_COLOR;
 
+    public static final Color DEFAULT_CURRENT_DATE_HIGHLIGHT_COLOR = Color.YELLOW, DEFAULT_SELECTED_DATE_HIGHLIGHT_COLOR = Color.ORANGE;
+    
     static {
         double scalingFactor = GuiUtils.determineScalingFactor();
 
@@ -103,7 +106,8 @@ public class DateEditorPanel extends JPanel implements ActionListener{
                 dayButtons[count] = new JButton(String.valueOf(d));
                 // No need to check year & month, they should be equal to current year & month during initialization
                 if (d == calendar.getDay()) {
-                    dayButtons[count].setBackground(Color.YELLOW);
+                    // Selected date highlight always precede current date highlight
+                    dayButtons[count].setBackground(selectedDateHighlightColor);
                     selectedButton = dayButtons[count];
                 } else {
                     dayButtons[count].setBackground(grey);
@@ -146,13 +150,26 @@ public class DateEditorPanel extends JPanel implements ActionListener{
         setYearMonthLabel(calendar.getYear(), calendar.getMonth());
         int firstDay = DateCalendar.getFirstWeekDay(calendar.getYear(), calendar.getMonth());
         int availableDays = DateCalendar.getAvailableMonthdays(calendar.getYear(), calendar.getMonth());
+        
+        String calendarYearMonthPrefix = calendar.getYear() + "-" + ((calendar.getMonth() < 10)? "0" + calendar.getMonth() : "" + calendar.getMonth());
+        boolean isCurrentYearMonth = currentDate.getYear() == calendar.getYear() && currentDate.getMonth() == calendar.getMonth(),
+            isSelectedYearMonth = currentSelection != null && currentSelection.startsWith(calendarYearMonthPrefix);
+        
         for (int count = 0; count < dayButtons.length; count++) {
             int d = count + 2 - firstDay;
             if (d <= availableDays && d > 0) {
+                boolean isSelectedDate = false;
+                if (isSelectedYearMonth) {
+                    String dateStr = calendarYearMonthPrefix + "-" + ((d < 10) ? "0" + d : "" + d);
+                    isSelectedDate = dateStr.equals(currentSelection);
+                }
+                
                 dayButtons[count].setText(String.valueOf(d));
-                if (d == currentDate.getDay() && currentDate.getYear() == calendar.getYear() && currentDate.getMonth() == calendar.getMonth()) {
-                    dayButtons[count].setBackground(Color.YELLOW);
-                    selectedButton = dayButtons[count];
+                if (isSelectedDate) {
+                    // Selected date highlight always precede current date highlight
+                    dayButtons[count].setBackground(selectedDateHighlightColor);
+                } else if (isCurrentYearMonth && d == currentDate.getDay()) {
+                    dayButtons[count].setBackground(currentDateHighlightColor);
                 } else {
                     dayButtons[count].setBackground(grey);
                 }
@@ -220,13 +237,11 @@ public class DateEditorPanel extends JPanel implements ActionListener{
             resetDays();
         } else {
             if (!source.getText().equals("")) {
-                if (selectedButton != null) {
-                    selectedButton.setBackground(grey);
-                }
+                clearSelectedButtonHighlight();
+                
                 selectedButton = source;
                 
-                // Only highlight current date but not selected date
-                //source.setBackground(Color.YELLOW);
+                selectedButton.setBackground(selectedDateHighlightColor);
                 
                 calendar.setDay(Integer.parseInt(source.getText()));
                 
@@ -241,6 +256,22 @@ public class DateEditorPanel extends JPanel implements ActionListener{
         }
     }
     
+    public Color getCurrentDateHighlightColor() {
+        return currentDateHighlightColor;
+    }
+
+    public void setCurrentDateHighlightColor(Color currentDateHighlightColor) {
+        this.currentDateHighlightColor = currentDateHighlightColor;
+    }
+    
+    public Color getSelectedDateHighlightColor() {
+        return selectedDateHighlightColor;
+    }
+
+    public void setSelectedDateHighlightColor(Color selectedDateHighlightColor) {
+        this.selectedDateHighlightColor = selectedDateHighlightColor;
+    }
+
     public void addObserver(DateEditorObserver obs) {
         observers.add(obs);
     }
@@ -287,14 +318,62 @@ public class DateEditorPanel extends JPanel implements ActionListener{
         calendar.setDate(dateStr, formatStr);
     }
     
-    public void setSelection(String selection) {
+    // setValue should be used, this is reserved for internal use
+    // set currentSelection without triggering observer
+    protected void setSelection(String selection) {
         this.currentSelection = selection;
         this.origin = this.currentSelection;
+    }
+    
+    private void clearSelectedButtonHighlight() {
+        if (selectedButton != null) {
+            String dayStr = selectedButton.getText();
+            DateCalendar currentDate = new DateCalendar();
+
+            boolean isCurrentDate = currentDate.getYear() == calendar.getYear() && currentDate.getMonth() == calendar.getMonth() &&
+                String.valueOf(currentDate.getDay()).equals(dayStr);
+
+            // If selectedButton is also current date, highlight it again
+            if (isCurrentDate) {
+                selectedButton.setBackground(currentDateHighlightColor);
+            } else {
+                selectedButton.setBackground(grey);
+            }
+        }
+    }
+    
+    private void updateHighlight() {
+        // Leave current date highlight to resetDays, only search for selected date button, except selectedButton is also current date
+        
+        if (!StringUtil.isEmptyString(currentSelection)) {
+            // reset current highlighted button
+            clearSelectedButtonHighlight();
+            
+            int selectedDay = Integer.parseInt(currentSelection.substring(currentSelection.lastIndexOf("-")+1), 10);
+            
+            String calendarYearMonthPrefix = calendar.getYear() + "-" + ((calendar.getMonth() < 10)? "0" + calendar.getMonth() : "" + calendar.getMonth());
+            boolean isSelectedYearMonth = currentSelection != null && currentSelection.startsWith(calendarYearMonthPrefix);
+
+            if (isSelectedYearMonth) {
+                for (int i = selectedDay-1; i < dayButtons.length; i++) {
+                    String dayStr = dayButtons[i].getText();
+                    
+                    String dateStr = calendarYearMonthPrefix + "-" + ((dayStr.length()==1)? "0" + dayStr : dayStr);
+                    
+                    if (dateStr.equals(currentSelection)) {
+                        selectedButton = dayButtons[i];
+                        dayButtons[i].setBackground(selectedDateHighlightColor);
+                        break;
+                    }
+                }
+            }
+        }
     }
     
     public void setValue(String value) {
         if (!StringUtil.equals(value, currentSelection)) {
             currentSelection = DateTimeParser.format(value, outputPattern, outputPattern);
+            updateHighlight();
             notifyObservers(currentSelection);
         }
         origin = currentSelection;
@@ -303,6 +382,7 @@ public class DateEditorPanel extends JPanel implements ActionListener{
     public void resetValue() {
         if (!currentSelection.equals(origin)) {
             currentSelection = origin;
+            updateHighlight();
             notifyObservers(currentSelection);
         }
     }
