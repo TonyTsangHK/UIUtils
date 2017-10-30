@@ -1234,9 +1234,14 @@ public class GuiUtils {
         public boolean isMajorVersion() {
             return parts.length == 1 && update == -1;
         }
+        
+        public boolean isMajorVersionFirst() {
+            // Java 9 starts with 9.x.x
+            return parts.length > 1 && parts[0] > 8;
+        }
 
         public int getMajorVersion() {
-            if (isMajorVersion()) {
+            if (isMajorVersion() || isMajorVersionFirst()) {
                 return parts[0];
             } else if (parts.length > 1) {
                 return parts[1];
