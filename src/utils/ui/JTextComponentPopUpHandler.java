@@ -2,15 +2,14 @@ package utils.ui;
 
 import utils.ui.lang.LanguageHandler;
 
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.text.JTextComponent;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.text.JTextComponent;
 
 public class JTextComponentPopUpHandler implements MouseListener {
     private JTextComponent source;

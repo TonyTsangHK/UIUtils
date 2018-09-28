@@ -1,14 +1,13 @@
 package utils.ui.component;
 
+import javax.swing.JTextField;
+import javax.swing.text.Document;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-
-import javax.swing.JTextField;
-import javax.swing.text.Document;
 
 @SuppressWarnings("serial")
 public class PlaceHolderField extends JTextField implements FocusListener {

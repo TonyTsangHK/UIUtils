@@ -1,13 +1,12 @@
 package utils.ui;
 
+import utils.string.StringUtil;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-
-import javax.swing.*;
-
-import utils.string.StringUtil;
 
 public class DialogUtil {
     public static final String 

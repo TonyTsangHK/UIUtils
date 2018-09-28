@@ -2,10 +2,9 @@ package utils.ui.component;
 
 import utils.ui.lang.LanguageHandler;
 
-import java.awt.*;
-import java.awt.event.*;
-
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * @deprecated Use DatePicker instead

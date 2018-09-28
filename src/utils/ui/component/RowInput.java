@@ -1,20 +1,18 @@
 package utils.ui.component;
 
+import utils.event.RowInputEvent;
+import utils.event.RowInputListener;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.SpringLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-
-import utils.event.RowInputEvent;
-import utils.event.RowInputListener;
 
 @SuppressWarnings("serial")
 public class RowInput extends JPanel implements ActionListener {

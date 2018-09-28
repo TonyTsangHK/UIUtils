@@ -1,14 +1,13 @@
 package utils.ui.component;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.Date;
+import utils.date.DateTimeParser;
+import utils.ui.lang.LanguageHandler;
 
 import javax.swing.JTextField;
 import javax.swing.text.Document;
-
-import utils.date.DateTimeParser;
-import utils.ui.lang.LanguageHandler;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Date;
 
 @SuppressWarnings("serial")
 public class DateField extends JTextField implements MouseListener {

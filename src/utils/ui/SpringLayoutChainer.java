@@ -1,13 +1,11 @@
 package utils.ui;
 
-import java.awt.*;
-
-import java.util.Collection;
-import java.util.Iterator;
-
 import javax.swing.Spring;
 import javax.swing.SpringLayout;
 import javax.swing.SpringLayout.Constraints;
+import java.awt.*;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Chainer class to facilitate SpringLayout's constraint settings

@@ -1,5 +1,20 @@
 package utils.ui.component;
 
+import utils.constants.Orientation;
+import utils.event.RangeSelectionChangeEvent;
+import utils.event.RangeSelectionChangeEvent.Type;
+import utils.listener.RangeSelectionChangeListener;
+import utils.listener.initiator.RangeSelectionChangeEventInitiator;
+import utils.listener.proxy.RangeSelectionChangeListenerProxy;
+import utils.math.IntegerRange;
+import utils.math.MathUtil;
+import utils.ui.GuiUtils;
+import utils.ui.SpringLayoutChainer;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SpringLayout;
+import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -13,22 +28,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-import javax.swing.SwingConstants;
-
-import utils.constants.Orientation;
-import utils.event.RangeSelectionChangeEvent;
-import utils.event.RangeSelectionChangeEvent.Type;
-import utils.listener.RangeSelectionChangeListener;
-import utils.listener.initiator.RangeSelectionChangeEventInitiator;
-import utils.listener.proxy.RangeSelectionChangeListenerProxy;
-import utils.math.IntegerRange;
-import utils.math.MathUtil;
-import utils.ui.GuiUtils;
-import utils.ui.SpringLayoutChainer;
 
 @SuppressWarnings("serial")
 public class RangeSelectionPanel extends JPanel implements RangeSelectionChangeEventInitiator {

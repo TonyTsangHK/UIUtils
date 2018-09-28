@@ -1,8 +1,8 @@
 package utils.ui;
 
-import java.awt.*;
-import java.util.*;
 import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
 
 public class FormComponentManager {
     private ArrayList<FormComponent> components;

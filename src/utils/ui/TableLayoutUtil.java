@@ -1,9 +1,9 @@
 package utils.ui;
 
-import info.clearthought.layout.*;
+import info.clearthought.layout.TableLayoutConstraints;
 
-import java.awt.*;
 import javax.swing.JLabel;
+import java.awt.*;
 
 public class TableLayoutUtil {
     private TableLayoutUtil() {}

@@ -1,8 +1,8 @@
 package utils.listener;
 
-import java.util.EventListener;
-
 import utils.event.RangeSelectionChangeEvent;
+
+import java.util.EventListener;
 
 public interface RangeSelectionChangeListener extends EventListener {
     public void rangeSelectionChanged(RangeSelectionChangeEvent evt);

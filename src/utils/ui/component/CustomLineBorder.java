@@ -1,11 +1,10 @@
 package utils.ui.component;
 
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
-
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 
 @SuppressWarnings("serial")
 public class CustomLineBorder extends LineBorder {

@@ -1,8 +1,7 @@
 package utils.ui.dialog;
 
-import java.awt.*;
-
 import javax.swing.*;
+import java.awt.*;
 
 public class InfoDialog extends AbstractDialog {
     private static final long serialVersionUID = 1L;

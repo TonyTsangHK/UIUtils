@@ -1,5 +1,10 @@
 package utils.ui.component;
 
+import javax.swing.BorderFactory;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -9,12 +14,6 @@ import java.awt.Rectangle;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
 
 public class CheckBoxTitledBorder implements Border, MouseListener {
     private JCheckBox checkBox;

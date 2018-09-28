@@ -1,12 +1,14 @@
 package utils.ui.component;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.ListIterator;
-
-import javax.swing.*;
 
 public class SelectablePanel extends JPanel implements MouseListener, MouseMotionListener {
     private static final long serialVersionUID = 1L;

@@ -1,14 +1,10 @@
 package utils.ui.component;
 
 import info.clearthought.layout.TableLayout;
-
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import utils.event.ValueChangeEvent;
+import utils.listener.ValueChangeListener;
+import utils.string.StringUtil;
+import utils.ui.TableLayoutUtil;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,11 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-import utils.event.ValueChangeEvent;
-import utils.listener.ValueChangeListener;
-import utils.string.StringUtil;
-import utils.ui.TableLayoutUtil;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 public class RowInputComponent extends InputComponentPanel implements ValueChangeListener<String> {
     private static final long serialVersionUID = 1L;

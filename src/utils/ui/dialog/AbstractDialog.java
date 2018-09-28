@@ -1,10 +1,9 @@
 package utils.ui.dialog;
 
-import java.awt.*;
+import utils.ui.GuiUtils;
 
 import javax.swing.*;
-
-import utils.ui.GuiUtils;
+import java.awt.*;
 
 public class AbstractDialog extends JDialog {
     public AbstractDialog(Frame frame) {

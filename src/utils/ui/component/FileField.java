@@ -1,28 +1,24 @@
 package utils.ui.component;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import javax.swing.event.EventListenerList;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileView;
-
 import utils.event.FileChoosedEvent;
 import utils.event.FileChoosedListener;
 import utils.event.ValueChangeEvent;
 import utils.listener.ValueChangeListener;
 import utils.string.StringUtil;
 
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.event.EventListenerList;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileView;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.File;
 import java.util.List;
 

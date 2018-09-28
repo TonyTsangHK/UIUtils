@@ -1,8 +1,7 @@
 package utils.ui.tab;
 
-import java.awt.*;
-
 import javax.swing.*;
+import java.awt.*;
 
 public abstract class CustomTabbedPane extends JTabbedPane {
     private static final long serialVersionUID = 1L;

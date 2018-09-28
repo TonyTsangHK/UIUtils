@@ -1,14 +1,13 @@
 package utils.ui.component;
 
-import java.awt.EventQueue;
+import utils.event.ValueChangeEvent;
+import utils.listener.ValueChangeListener;
+import utils.string.StringUtil;
 
 import javax.swing.JTextField;
 import javax.swing.event.EventListenerList;
 import javax.swing.text.Document;
-
-import utils.event.ValueChangeEvent;
-import utils.listener.ValueChangeListener;
-import utils.string.StringUtil;
+import java.awt.EventQueue;
 
 @SuppressWarnings("serial")
 public class ChangeableTextField extends JTextField implements ChangeableComponent<String> {

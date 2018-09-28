@@ -1,12 +1,12 @@
 package utils.ui.component;
 
-import java.awt.*;
-import java.awt.event.*;
+import utils.date.DateCalendar;
+import utils.ui.lang.LanguageHandler;
 
 import javax.swing.*;
-
-import utils.date.*;
-import utils.ui.lang.LanguageHandler;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @deprecated Not used in other UI components, except DateEditDialog which is deprecated

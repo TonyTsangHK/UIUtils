@@ -1,7 +1,7 @@
 package utils.ui.tab;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public interface TabComponent {
      public Component getComponent();

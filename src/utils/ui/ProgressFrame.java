@@ -1,11 +1,11 @@
 package utils.ui;
 
-import java.awt.*;
-import java.awt.event.*;
+import utils.listener.ActionListenerWrapper;
 
 import javax.swing.*;
-
-import utils.listener.ActionListenerWrapper;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ProgressFrame extends JFrame {
     private static final long serialVersionUID = 1L;

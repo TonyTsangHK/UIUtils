@@ -1,8 +1,8 @@
 package utils.ui.tableInput.inputs;
 
-import javax.swing.*;
-
 import utils.document.PositiveDoubleDocument;
+
+import javax.swing.*;
 
 public class PositiveDoubleFieldInputComponent implements TableInputComponent<Double> {
     private JTextField field;

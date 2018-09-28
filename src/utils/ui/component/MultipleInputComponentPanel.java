@@ -1,13 +1,13 @@
 package utils.ui.component;
 
-import info.clearthought.layout.*;
+import info.clearthought.layout.TableLayout;
+import utils.ui.GuiUtils;
+import utils.ui.TableLayoutUtil;
 
 import javax.swing.*;
-
-import utils.ui.*;
-
-import java.awt.event.*;
-import java.util.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class MultipleInputComponentPanel extends JPanel implements ActionListener {
     private static final long serialVersionUID = 1L;

@@ -1,14 +1,13 @@
 package utils.ui.component;
 
-import java.awt.EventQueue;
+import utils.event.ValueChangeEvent;
+import utils.listener.ValueChangeListener;
+import utils.string.StringUtil;
 
 import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.event.EventListenerList;
-
-import utils.event.ValueChangeEvent;
-import utils.listener.ValueChangeListener;
-import utils.string.StringUtil;
+import java.awt.EventQueue;
 
 public class ChangeableLabel extends JLabel implements ChangeableComponent<String> {
     private static final long serialVersionUID = 1L;

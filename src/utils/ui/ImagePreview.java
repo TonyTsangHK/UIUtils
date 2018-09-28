@@ -1,8 +1,9 @@
 package utils.ui;
 
 import javax.swing.*;
-import java.beans.*;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 
 public class ImagePreview extends JComponent

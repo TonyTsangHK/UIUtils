@@ -1,17 +1,21 @@
 package utils.ui.tableInput;
 
-import info.clearthought.layout.*;
-
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.util.List;
+import info.clearthought.layout.TableLayout;
+import utils.data.ArrayUtil;
+import utils.ui.GuiUtils;
+import utils.ui.TableLayoutUtil;
+import utils.ui.tableInput.inputs.ButtonInputComponent;
+import utils.ui.tableInput.inputs.LabelTableComponent;
+import utils.ui.tableInput.inputs.TableInputComponent;
 
 import javax.swing.*;
-
-import utils.data.*;
-import utils.ui.*;
-import utils.ui.tableInput.inputs.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TableInput implements ActionListener, FocusListener {
     private List<String> titles;

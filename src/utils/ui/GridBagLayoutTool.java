@@ -1,7 +1,7 @@
 package utils.ui;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 
 public class GridBagLayoutTool {
     public static void addTitledComponent(Container c, int startX, int startY, 

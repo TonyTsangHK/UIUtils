@@ -1,9 +1,9 @@
 package utils.ui.component;
 
-import java.awt.Component;
-
 import utils.event.TabbedPaneEvent;
 import utils.listener.TabbedPaneListener;
+
+import java.awt.Component;
 
 public interface TabbedPaneComponent {
      public Component getComponent();

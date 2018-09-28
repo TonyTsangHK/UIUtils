@@ -1,11 +1,11 @@
 package utils.listener.proxy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import utils.event.TabbedPaneEvent;
 import utils.listener.TabbedPaneListener;
 import utils.listener.initiator.TabbedPaneListenerInitiator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TabbedPaneListenerProxy implements TabbedPaneListenerInitiator {
     private List<TabbedPaneListener> listeners;

@@ -1,17 +1,16 @@
 package utils.ui.component;
 
+import utils.constants.Orientation;
+import utils.ui.GuiUtils;
+import utils.ui.SpringLayoutChainer;
+
+import javax.swing.JPanel;
+import javax.swing.SpringLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-
-import utils.constants.Orientation;
-import utils.ui.GuiUtils;
-import utils.ui.SpringLayoutChainer;
 
 @SuppressWarnings("serial")
 public class CenterizedPanel extends JPanel {

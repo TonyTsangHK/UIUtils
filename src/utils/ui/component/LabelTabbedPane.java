@@ -1,13 +1,12 @@
 package utils.ui.component;
 
+import utils.event.TabbedPaneEvent;
+import utils.listener.TabbedPaneListener;
+
+import javax.swing.JTabbedPane;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JTabbedPane;
-
-import utils.event.TabbedPaneEvent;
-import utils.listener.TabbedPaneListener;
 
 @SuppressWarnings("serial")
 public class LabelTabbedPane extends JTabbedPane {

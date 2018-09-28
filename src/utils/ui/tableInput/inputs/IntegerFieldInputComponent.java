@@ -1,11 +1,11 @@
 package utils.ui.tableInput.inputs;
 
-import javax.swing.JComponent;
-import javax.swing.JTextField;
-
 import utils.document.IntegerDocument;
 import utils.math.MathUtil;
 import utils.ui.GuiUtils;
+
+import javax.swing.JComponent;
+import javax.swing.JTextField;
 
 public class IntegerFieldInputComponent implements TableInputComponent<Integer> {
     private JTextField field;

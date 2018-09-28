@@ -1,10 +1,10 @@
 package utils.event;
 
-import java.util.EventObject;
-
 import utils.math.IntegerRange;
 import utils.ui.component.RangeSelectionPanel;
 import utils.ui.component.RangeSelectionPanel.RangeComponent;
+
+import java.util.EventObject;
 
 @SuppressWarnings("serial")
 public class RangeSelectionChangeEvent extends EventObject {

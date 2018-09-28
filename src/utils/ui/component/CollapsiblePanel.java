@@ -1,18 +1,16 @@
 package utils.ui.component;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-
-import java.util.ArrayList;
-import java.util.List;
+import utils.ui.SelectionState;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
-import utils.ui.SelectionState;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class CollapsiblePanel extends JPanel implements ChangeListener {

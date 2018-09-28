@@ -6,13 +6,13 @@ package utils.ui;
  * Copyright 2004 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
-import java.awt.*;
-import java.awt.dnd.*;
+
 import javax.swing.*;
 import javax.swing.plaf.UIResource;
-
-import java.awt.event.*;
-import javax.swing.Timer;
+import java.awt.*;
+import java.awt.dnd.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * The Swing DropTarget implementation supports multicast notification

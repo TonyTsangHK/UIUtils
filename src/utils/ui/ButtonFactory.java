@@ -1,8 +1,8 @@
 package utils.ui;
 
-import java.awt.event.*;
-
 import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 public class ButtonFactory {
     public static JMenuItem createJMenuItem(String name) {

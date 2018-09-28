@@ -1,12 +1,11 @@
 package utils.ui.component;
 
-import java.io.Serializable;
+import utils.data.DataManipulator;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
-
-import utils.data.DataManipulator;
+import java.io.Serializable;
  
 public class IndexedButtonGroup extends ButtonGroup implements Serializable {
     private static final long serialVersionUID = 1L;

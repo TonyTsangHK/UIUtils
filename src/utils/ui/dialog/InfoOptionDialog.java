@@ -1,12 +1,12 @@
 package utils.ui.dialog;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import utils.ui.component.TriggerOption;
 
 import javax.swing.*;
-
-import utils.ui.component.TriggerOption;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 public class InfoOptionDialog extends AbstractDialog implements ActionListener {
     private static final long serialVersionUID = 1L;

@@ -1,8 +1,7 @@
 package utils.ui.component;
 
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
 
 public class TriggerOption {
     private JButton button;

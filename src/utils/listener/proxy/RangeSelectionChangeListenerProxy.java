@@ -1,11 +1,11 @@
 package utils.listener.proxy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import utils.event.RangeSelectionChangeEvent;
 import utils.listener.RangeSelectionChangeListener;
 import utils.listener.initiator.RangeSelectionChangeEventInitiator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RangeSelectionChangeListenerProxy implements RangeSelectionChangeEventInitiator {
     private List<RangeSelectionChangeListener> listeners;

@@ -1,8 +1,8 @@
 package utils.ui.tableInput.inputs;
 
-import javax.swing.*;
-
 import utils.document.PositiveIntegerDocument;
+
+import javax.swing.*;
 
 public class PositiveIntegerFieldInputComponent implements TableInputComponent<Integer> {
     private JTextField field;

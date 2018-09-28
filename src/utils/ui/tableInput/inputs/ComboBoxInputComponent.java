@@ -1,9 +1,9 @@
 package utils.ui.tableInput.inputs;
 
+import utils.ui.GuiUtils;
+
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-
-import utils.ui.GuiUtils;
 
 @SuppressWarnings("rawtypes")
 public class ComboBoxInputComponent implements TableInputComponent {
